@@ -1,3 +1,23 @@
+git_email="$1"
+git_name="$2"
+ssh_password="$3"
+
+if [[ -z $git_email ]]; then
+    echo "Please provide your email for Github setup"
+    return
+fi
+
+if [[ -z $git_name ]]; then
+    echo "Please provide your full name for Github setup"
+    return
+fi
+
+if [[ -z $ssh_password ]]; then
+    echo "Please provide a passphrase to generate RSA key pair"
+    return
+fi
+
+
 sudo apt-get update && sudo apt-get upgrade -y
 
 # Basic packages
@@ -7,12 +27,15 @@ sudo apt-get install -y ca-certificates curl wget gnupg build-essential nano lib
 sudo apt install git-all
 git --version
 
-ssh-keygen -t rsa -b 4096 -C "<youremail>@gmail.com" -f ~/.ssh/id_rsa -N ""
+ssh-keygen -t rsa -b 4096 -C "${git_email}" -f ~/.ssh/id_rsa -N ${ssh_password}
 echo "Copw the follwing pulic key to your Github profile: https://github.com/settings/keys"
 cat ~/.ssh/id_rsa.pub
 
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
+
+git config --global user.email "${git_email}"
+git config --global user.name "${git_name}"
 
 echo "Cloning NasSetup script from Github"
 mkdir -p ~/Projects
@@ -44,7 +67,9 @@ pip --version
 sudo pip3 install virtualenv virtualenvwrapper
 
 # Docker
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose  docker-compose-plugin -y
+docker -v
+docker-compose -v
 sudo docker run hello-world
 
 ## Portainer
@@ -53,5 +78,25 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 sudo docker ps
 wget https://localhost:9443 # You need to define a new password, at leat 12 chars long
 
+# Jellyfin
+mkdir -p ~/jellyfin/config/
+mkdir -p ~/jellyfin/cache/
+sudo docker pull jellyfin/jellyfin
+cp ~/Projects/SetupNas/jellyfin/docker-compose.yaml ~/jellyfin && cd ~/jellyfin && sudo docker-compose up
+
 # VLC
 sudo snap install vlc
+
+# Paperless
+mkdir -p ~/paperless/media/
+mkdir -p ~/paperless/data/
+mkdir -p ~/paperless/consume/
+mkdir -p ~/paperless/export/
+bash -c "$(curl -L https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/install-paperless-ngx.sh)"
+
+# MQTT
+sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa
+sudo apt install -y mosquitto mosquitto-clients
+sudo snap install mqtt-explorer
+mkdir -p ~/home-assistant/config/
+cp ~/Projects/SetupNas/home-assistant/docker-compose.yaml ~/home-assistant && cd ~/home-assistant && sudo docker-compose up
