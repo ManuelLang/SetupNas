@@ -55,16 +55,20 @@ sudo snap install code --classic
 # OhMyZsh
 sudo apt-get install -y zsh
 curl -L http://install.ohmyz.sh | sh
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+chsh -s $(which zsh) # Set zsh shell as default
+cp ~/Projects/SetupNas/.zshrc ~/.zshrc
 
 # Python
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get install -y libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
 
-sudo apt-get install -y python3 python3-pip
+sudo apt-get install -y python3 python3-pip python3-dev
 python3 --version
 pip --version
 
-sudo pip3 install virtualenv virtualenvwrapper
+sudo pip3 install virtualenv virtualenvwrapper python3.10-venv
 
 # Docker
 # Add Docker's official GPG key:
