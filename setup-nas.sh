@@ -24,7 +24,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y ca-certificates curl wget gnupg build-essential nano libssl-dev
 
 # Git
-sudo apt install git-all
+sudo apt install -y git-all
 git --version
 
 ssh-keygen -t rsa -b 4096 -C "${git_email}" -f ~/.ssh/id_rsa -N ${ssh_password}
@@ -43,7 +43,7 @@ cd ~/Projects && git clone git@github.com:ManuelLang/SetupNas.git
 
 # Cockpit
 . /etc/os-release
-sudo apt install -t ${VERSION_CODENAME}-backports cockpit
+sudo apt install -y -t ${VERSION_CODENAME}-backports cockpit
 	
 systemctl status cockpit
 wget http://localhost:9090
@@ -67,7 +67,22 @@ pip --version
 sudo pip3 install virtualenv virtualenvwrapper
 
 # Docker
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose  docker-compose-plugin -y
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose docker-compose-plugin
+
 docker -v
 docker-compose -v
 sudo docker run hello-world
