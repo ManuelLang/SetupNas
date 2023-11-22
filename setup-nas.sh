@@ -64,7 +64,7 @@ cp ~/Projects/SetupNas/.zshrc ~/.zshrc
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get install -y libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
 
-sudo apt-get install -y python3 python3-pip python3-dev
+sudo apt-get install -y python3 python3-pip python3-dev gcc
 python3 --version
 pip --version
 
