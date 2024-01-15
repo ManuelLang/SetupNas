@@ -1,0 +1,516 @@
+- id: '1703061770743'
+  alias: Ouvrir volets SudOuest matin semaine
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: 0
+  - platform: time
+    at: 06:46:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: 06:45:00
+  action:
+  - type: turn_on
+    device_id: fbefae5338a639f6b748cd5621cf85fe
+    entity_id: fb7e779a23b4dac2b2b550a763afaad1
+    domain: switch
+  - device_id: d23d3687b8fb7cba746bc9c2d0515b73
+    domain: cover
+    entity_id: be2c34137b6eb930eb1d452b02b4e64a
+    type: set_position
+    position: 100
+  - device_id: e873647e70e13594ddeca27e064597f1
+    domain: cover
+    entity_id: 5ac7e2dbb0390e998bbe4369b76a0f5a
+    type: set_position
+    position: 100
+  - device_id: 94aab80c7a1f940c57227317e751ede1
+    domain: cover
+    entity_id: 88047bd394831b564cddef521584443d
+    type: set_position
+    position: 100
+  - delay:
+      hours: 0
+      minutes: 3
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: fbefae5338a639f6b748cd5621cf85fe
+    entity_id: fb7e779a23b4dac2b2b550a763afaad1
+    domain: switch
+  mode: single
+- id: '1703061910461'
+  alias: Ouvrir volets matin week-end
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: '60'
+  - platform: time
+    at: 09:30:00
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+    after: 08:45:00
+  action:
+  - device_id: d23d3687b8fb7cba746bc9c2d0515b73
+    domain: cover
+    entity_id: be2c34137b6eb930eb1d452b02b4e64a
+    type: set_position
+    position: 100
+  - device_id: e873647e70e13594ddeca27e064597f1
+    domain: cover
+    entity_id: 5ac7e2dbb0390e998bbe4369b76a0f5a
+    type: set_position
+    position: 100
+  - device_id: 94aab80c7a1f940c57227317e751ede1
+    domain: cover
+    entity_id: 88047bd394831b564cddef521584443d
+    type: set_position
+    position: 100
+  - device_id: 952d1c874e05225be0b6e38abd6942e2
+    domain: cover
+    entity_id: 7d1cc16f4c3ddbe10d6381d5eeae59b1
+    type: set_position
+    position: 100
+  - device_id: 58bf8e604aa09a68de31afd3218c584c
+    domain: cover
+    entity_id: 6faca14531aa1b6ac3ef25bed19d949d
+    type: set_position
+    position: 100
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 100
+  mode: single
+- id: '1703062178774'
+  alias: Fermer volets Est le soir
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sun.sun
+    attribute: elevation
+    below: -4
+  - type: illuminance
+    platform: device
+    device_id: 03c6371ca7e4a9883aad99868e36a1ab
+    entity_id: fecf85810329acf9b1ad2c9991c2c484
+    domain: sensor
+    below: 60
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  condition:
+  - condition: time
+    after: '16:30:00'
+  action:
+  - device_id: 952d1c874e05225be0b6e38abd6942e2
+    domain: cover
+    entity_id: 7d1cc16f4c3ddbe10d6381d5eeae59b1
+    type: set_position
+    position: 0
+  - device_id: 58bf8e604aa09a68de31afd3218c584c
+    domain: cover
+    entity_id: 6faca14531aa1b6ac3ef25bed19d949d
+    type: set_position
+    position: 10
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 10
+  mode: single
+- id: '1703062507535'
+  alias: Sbd aérer si humide
+  description: ''
+  trigger:
+  - type: humidity
+    platform: device
+    device_id: 5c6f5fa0698eabcdf13a069657d4fee8
+    entity_id: 275e63d30045bfb19feb28eb16e802c6
+    domain: sensor
+    above: 70
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  condition:
+  - condition: device
+    device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: is_closed
+  action:
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 12
+  mode: single
+- id: '1703066707633'
+  alias: Notification quand présence dans maison
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.presence_dans_maison
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition:
+  - condition: device
+    device_id: 64bdf846f51f7ad5cf251370a03a2f14
+    domain: device_tracker
+    entity_id: 776026ef6e6d1da7a290a637d4f2170c
+    type: is_not_home
+  action:
+  - service: notify.notify
+    data:
+      message: Présence dans maison
+  mode: single
+- id: '1703407723588'
+  alias: Simulation présence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.random_presence
+    from:
+    to:
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: '15'
+  - condition: time
+    before: '22:30:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.cuisine
+    data:
+      media_content_id: spotify://a7543c4dc2fe761bebe652a49468b8c9/spotify:playlist:1fvCVk2CZgxNFrjNkfk0p6
+      media_content_type: spotify://playlist
+    metadata:
+      title: Punk rock
+      thumbnail: https://mosaic.scdn.co/640/ab67616d0000b2730158cbde70672dd821972907ab67616d0000b27354ab617bc2d4974ab6ffbeceab67616d0000b273db89b08034de626ebee6823dab67616d0000b273fbc71c99f9c1296c56dd51b6
+      media_class: playlist
+      children_media_class: track
+      navigateIds:
+      - {}
+      - media_content_type: spotify://library
+        media_content_id: spotify://a7543c4dc2fe761bebe652a49468b8c9
+      - media_content_type: spotify://current_user_playlists
+        media_content_id: spotify://a7543c4dc2fe761bebe652a49468b8c9/current_user_playlists
+  - type: toggle
+    device_id: fbefae5338a639f6b748cd5621cf85fe
+    entity_id: fb7e779a23b4dac2b2b550a763afaad1
+    domain: switch
+  - type: toggle
+    device_id: bcfd8cd8a55f30d0c2d7ccf134d79bb9
+    entity_id: 1c32e94702667e98dbf60b7b68a7357f
+    domain: switch
+  mode: single
+- id: '1703499058111'
+  alias: Eclairage cave escalier - allumer
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 026c2b4114ee085ff718da4cfa7be14e
+    entity_id: 138b3ed1d5df2d6a75ae779feaa8fd6f
+    domain: binary_sensor
+  - type: opened
+    platform: device
+    device_id: e201add504ae47f7b6bb3939add60ed3
+    entity_id: ab3d0de49ae83d9c3750b15ef9da0a4c
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: ecb25394c1c9f786bafd2ab8a2c83128
+    entity_id: dfbd44d4062000d9559c3dc9e2c6ae69
+    domain: switch
+  mode: single
+- id: '1703528354869'
+  alias: Eclairage cuisine - allumer
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: c86d369050fe2440b5903f135c34f303
+    entity_id: d7b7d8e5c1c088bbb3f952f4a8f0be5a
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 03c6371ca7e4a9883aad99868e36a1ab
+    entity_id: fecf85810329acf9b1ad2c9991c2c484
+    domain: sensor
+    below: 90
+  action:
+  - type: turn_on
+    device_id: bcfd8cd8a55f30d0c2d7ccf134d79bb9
+    entity_id: 1c32e94702667e98dbf60b7b68a7357f
+    domain: switch
+  mode: single
+- id: '1703535800508'
+  alias: Mode nuit
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:30:00'
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.coucher
+    metadata: {}
+  mode: single
+- id: '1704127415641'
+  alias: Ouvrir volets Est matin semaine - jour
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  - platform: time
+    at: 08:31:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: 08:00:00
+  action:
+  - device_id: 952d1c874e05225be0b6e38abd6942e2
+    domain: cover
+    entity_id: 7d1cc16f4c3ddbe10d6381d5eeae59b1
+    type: set_position
+    position: 100
+  - device_id: 58bf8e604aa09a68de31afd3218c584c
+    domain: cover
+    entity_id: 6faca14531aa1b6ac3ef25bed19d949d
+    type: set_position
+    position: 100
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 100
+  mode: single
+- id: '1704181963984'
+  alias: Eclairage cave escalier - éteindre
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: 026c2b4114ee085ff718da4cfa7be14e
+    entity_id: 138b3ed1d5df2d6a75ae779feaa8fd6f
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 30
+  condition:
+  - type: is_no_motion
+    condition: device
+    device_id: 026c2b4114ee085ff718da4cfa7be14e
+    entity_id: 138b3ed1d5df2d6a75ae779feaa8fd6f
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  action:
+  - type: turn_off
+    device_id: ecb25394c1c9f786bafd2ab8a2c83128
+    entity_id: dfbd44d4062000d9559c3dc9e2c6ae69
+    domain: switch
+  mode: single
+- id: '1704182101365'
+  alias: Eclairage cuisine - éteindre
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: c86d369050fe2440b5903f135c34f303
+    entity_id: d7b7d8e5c1c088bbb3f952f4a8f0be5a
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 6
+      seconds: 0
+  condition:
+  - type: is_no_motion
+    condition: device
+    device_id: c86d369050fe2440b5903f135c34f303
+    entity_id: d7b7d8e5c1c088bbb3f952f4a8f0be5a
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  action:
+  - type: turn_off
+    device_id: bcfd8cd8a55f30d0c2d7ccf134d79bb9
+    entity_id: 1c32e94702667e98dbf60b7b68a7357f
+    domain: switch
+  mode: single
+- id: '1704182645978'
+  alias: Ouvrir volets Est matin semaine - aération
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+  - platform: time
+    at: 06:30:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: 00:00:00
+  action:
+  - device_id: 58bf8e604aa09a68de31afd3218c584c
+    domain: cover
+    entity_id: 6faca14531aa1b6ac3ef25bed19d949d
+    type: set_position
+    position: 10
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 10
+  mode: single
+- id: '1704390862353'
+  alias: Bouton lampe salon
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 732d99a53617f8845562e39806a3f4d5
+    type: action
+    subtype: single
+    discovery_id: 0x00158d000402446c action_single
+  condition: []
+  action:
+  - type: toggle
+    device_id: fbefae5338a639f6b748cd5621cf85fe
+    entity_id: fb7e779a23b4dac2b2b550a763afaad1
+    domain: switch
+  mode: single
+- id: '1704401918803'
+  alias: 'Volets ouverture centralisée '
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 732d99a53617f8845562e39806a3f4d5
+    type: action
+    subtype: double
+    discovery_id: 0x00158d000402446c action_double
+  condition: []
+  action:
+  - device_id: d23d3687b8fb7cba746bc9c2d0515b73
+    domain: cover
+    entity_id: be2c34137b6eb930eb1d452b02b4e64a
+    type: set_position
+    position: 100
+  - device_id: e873647e70e13594ddeca27e064597f1
+    domain: cover
+    entity_id: 5ac7e2dbb0390e998bbe4369b76a0f5a
+    type: set_position
+    position: 100
+  - device_id: 94aab80c7a1f940c57227317e751ede1
+    domain: cover
+    entity_id: 88047bd394831b564cddef521584443d
+    type: set_position
+    position: 100
+  - device_id: 952d1c874e05225be0b6e38abd6942e2
+    domain: cover
+    entity_id: 7d1cc16f4c3ddbe10d6381d5eeae59b1
+    type: set_position
+    position: 100
+  - device_id: 58bf8e604aa09a68de31afd3218c584c
+    domain: cover
+    entity_id: 6faca14531aa1b6ac3ef25bed19d949d
+    type: set_position
+    position: 100
+  - device_id: 98d1d1f41d8e2543ab873bcf66fa7097
+    domain: cover
+    entity_id: c989ffc8ad6e6e0a34550e26e6a56e9b
+    type: set_position
+    position: 100
+  mode: single
+- id: '1704401957761'
+  alias: Bouton scène coucher
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 732d99a53617f8845562e39806a3f4d5
+    type: action
+    subtype: hold
+    discovery_id: 0x00158d000402446c action_hold
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.coucher
+    metadata: {}
+  mode: single
+- id: '1704486977809'
+  alias: Lumiere cuisine minuterie
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: bcfd8cd8a55f30d0c2d7ccf134d79bb9
+    entity_id: 1c32e94702667e98dbf60b7b68a7357f
+    domain: switch
+    for:
+      hours: 0
+      minutes: 11
+      seconds: 0
+  condition:
+  - type: is_no_motion
+    condition: device
+    device_id: c86d369050fe2440b5903f135c34f303
+    entity_id: d7b7d8e5c1c088bbb3f952f4a8f0be5a
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  action:
+  - type: turn_off
+    device_id: bcfd8cd8a55f30d0c2d7ccf134d79bb9
+    entity_id: 1c32e94702667e98dbf60b7b68a7357f
+    domain: switch
+  mode: single

@@ -1,27 +1,29 @@
 version: '3.6'
 services:
   telegraf:
-    image: telegraf
+    image: telegraf:latest
     container_name: telegraf
     restart: always
     volumes:
     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
-    links:
-      - influxdb
+    environment:
+      - INFLUX_TOKEN=<YOUR_TOKEN>>
     ports:
-    - '8125:8125'
+      - 8125:8125
+    network_mode: host
 
   influxdb:
-    image: influxdb:1.8-alpine
+    image: influxdb:2.6
     container_name: influxdb
     env_file: configuration.env
     restart: always
     ports:
-      - '8086:8086'
+      - 8086:8086
+    network_mode: host
     volumes:
-      - influxdb_data:/var/lib/influxdb
+      - ./influxdb2_data:/var/lib/influxdb2:rw
       
 volumes:
   influxdb_data: {}

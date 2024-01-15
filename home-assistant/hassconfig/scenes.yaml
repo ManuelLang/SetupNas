@@ -1,0 +1,122 @@
+- id: '1703535757624'
+  name: Coucher
+  entities:
+    switch.lampe_cave_escalier_rdc_0xdc8e95fffe225a34:
+      last_seen: '2024-01-12T09:07:50.419Z'
+      linkquality: 72
+      friendly_name: Lampe/Cave/Escalier-RDC/0xdc8e95fffe225a34
+      state: 'off'
+    switch.lampe_cuisine_plan_de_travail_0xdc8e95fffe08f3df:
+      last_seen: '2024-01-12T09:04:40.573Z'
+      linkquality: 72
+      friendly_name: Lampe/Cuisine/Plan-de-travail/0xdc8e95fffe08f3df
+      state: 'off'
+    switch.lampe_salon_prise_tv_sud_0x847127fffeb3bad7:
+      last_seen: '2024-01-12T09:00:20.254Z'
+      linkquality: 21
+      power_on_behavior: previous
+      update:
+        installed_version: 587765297
+        latest_version: 537019939
+        state: idle
+      update_available:
+      friendly_name: Lampe/Salon/Prise-TV-Sud/0x847127fffeb3bad7
+      state: 'off'
+    cover.volet_cuisine_evier_sud_0xa4c138a64bebeeed:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:44.414Z'
+      linkquality: 21
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/Cuisine/Evier-Sud/0xa4c138a64bebeeed
+      supported_features: 15
+      state: closed
+    cover.volet_salon_terrasse_ouest_0xa4c138824b5ffedf:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:53.471Z'
+      linkquality: 0
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/Salon/Terrasse-Ouest/0xa4c138824b5ffedf
+      supported_features: 15
+      state: closed
+    cover.volet_salon_sud_0xa4c138f79dacff55:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:44.002Z'
+      linkquality: 54
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/Salon/Sud/0xa4c138f79dacff55
+      supported_features: 15
+      state: closed
+    cover.volet_salon_est_0xa4c1387a1ba91204:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:52.237Z'
+      linkquality: 21
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/Salon/Est/0xa4c1387a1ba91204
+      supported_features: 15
+      state: closed
+    cover.volet_wc_est_0xa4c13809d8e6dd3a:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:40.998Z'
+      linkquality: 15
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/WC/Est/0xa4c13809d8e6dd3a
+      supported_features: 15
+      state: closed
+    cover.volet_sdb_cour_est_0xa4c1388f4210ae70:
+      current_position: 0
+      calibration:
+      calibration_time:
+      last_seen: '2024-01-12T09:07:40.977Z'
+      linkquality: 39
+      motor_reversal:
+      moving: STOP
+      position: 0
+      device_class: shutter
+      friendly_name: Volet/Sdb/Cour-Est/0xa4c1388f4210ae70
+      supported_features: 15
+      state: closed
+    switch.lampe_cave_couloir_garage_0x70ac08fffec3c168:
+      last_seen: '2024-01-12T09:07:44.864Z'
+      linkquality: 93
+      power_on_behavior: 'off'
+      update:
+        installed_version: 4110
+        latest_version: 4110
+        state: idle
+      update_available:
+      friendly_name: Lampe/Cave/Couloir-garage/0x70ac08fffec3c168
+      state: 'off'
+    light.lampe_cave_couloir_garage_0x70ac08fffec3c168:
+      supported_color_modes:
+      - onoff
+      color_mode:
+      friendly_name: Lampe/Cave/Couloir-garage/0x70ac08fffec3c168
+      supported_features: 0
+      state: 'off'
+  icon: mdi:weather-night
+  metadata: {}

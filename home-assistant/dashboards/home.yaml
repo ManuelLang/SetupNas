@@ -1,0 +1,163 @@
+title: Maison
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: light.lampe_cuisine_plan_de_travail_0xdc8e95fffe08f3df
+          - entity: light.lampe_salon_prise_tv_sud_0x847127fffeb3bad7
+          - entity: light.lampe_cave_escalier_rdc_0xdc8e95fffe225a34
+          - entity: light.lampe_cave_couloir_garage_0x70ac08fffec3c168
+        title: Lumières
+        state_color: true
+      - type: weather-forecast
+        entity: weather.forecast_maison
+        forecast_type: daily
+      - show_state: true
+        show_name: true
+        camera_view: live
+        type: picture-entity
+        entity: camera.192_168_1_24
+        name: Caméra salon
+        camera_image: camera.192_168_1_24
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.presence_dans_maison
+            state_color: true
+          - type: history-graph
+            entities:
+              - entity: binary_sensor.presence_dans_maison
+      - type: history-graph
+        entities:
+          - sun.sun
+        title: Sun
+        logarithmic_scale: false
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.porte_ou_fenetre_ouverte
+            state_color: true
+          - type: history-graph
+            entities:
+              - entity: binary_sensor.porte_ou_fenetre_ouverte
+      - type: vertical-stack
+        cards:
+          - graph: line
+            type: sensor
+            detail: 2
+            entity: sensor.temperature_exterieure
+            icon: mdi:sun-thermometer-outline
+      - graph: line
+        type: sensor
+        entity: sensor.luminosite_exterieure_lux
+        detail: 2
+        icon: mdi:weather-sunny
+      - type: entities
+        entities:
+          - entity: cover.volets
+          - entity: cover.volet_cuisine_evier_sud_0xa4c138a64bebeeed
+          - entity: cover.volet_salon_terrasse_ouest_0xa4c138824b5ffedf
+          - entity: cover.volet_salon_sud_0xa4c138f79dacff55
+          - entity: cover.volet_salon_est_0xa4c1387a1ba91204
+          - entity: cover.volet_wc_est_0xa4c13809d8e6dd3a
+          - entity: cover.volet_sdb_cour_est_0xa4c1388f4210ae70
+        state_color: true
+        show_header_toggle: true
+        title: Volets
+      - square: false
+        type: grid
+        columns: 1
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.salon_temperature
+                name: Température
+              - entity: sensor.salon_humidite
+                name: Humidité
+              - entity: binary_sensor.salon_fenetre
+                name: Fenêtre
+              - entity: sensor.salon_chauffage
+                name: Chauffage
+              - entity: binary_sensor.ru0212873728_batterie
+              - entity: sensor.salon_tado_mode
+                name: Tado mode
+            title: Salon
+            state_color: true
+          - type: thermostat
+            entity: climate.salon
+            features:
+              - style: icons
+                hvac_modes:
+                  - 'off'
+                  - auto
+                  - heat
+                type: climate-hvac-modes
+      - type: media-control
+        entity: media_player.cuisine
+      - type: entities
+        entities:
+          - sensor.local_ip
+        title: Capteur
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: >-
+                  sensor.electricite_cave_linky_0x00158d000952042d_meter_serial_number
+                name: ADCO (numéro de série)
+              - entity: sensor.electricite_cave_linky_0x00158d000952042d_current_tarif
+                name: OPTARIF (tarification)
+              - entity: sensor.electricite_cave_linky_0x00158d000952042d_east
+                name: Energie consommée (cumul)
+              - entity: sensor.electricite_cave_linky_0x00158d000952042d_sinsts
+                name: Puissance consommée (instantané)
+              - entity: sensor.electricite_cave_linky_0x00158d000952042d_pref
+                name: PREF (puissance max autorisé)
+              - entity: sensor.electricite_cave_linky_0x00158d000952042d_irms1
+                name: Electricité consommée (instantané)
+            state_color: true
+            title: Conso électricité
+          - type: gauge
+            entity: sensor.electricite_cave_linky_0x00158d000952042d_irms1
+          - type: history-graph
+            entities:
+              - sensor.electricite_cave_linky_0x00158d000952042d_irms1
+          - type: history-graph
+            entities:
+              - sensor.electricite_cave_linky_0x00158d000952042d_east
+      - type: entities
+        entities:
+          - entity: sensor.temperature_bureau_jardin_ouest_0x00124b0029195a9f_humidity
+            name: Humidité
+          - entity: >-
+              sensor.temperature_bureau_jardin_ouest_0x00124b0029195a9f_temperature
+            name: Température
+        title: Temperature/Bureau/Jardin-Ouest/0x00124b0029195a9f
+      - type: entities
+        entities:
+          - entity: >-
+              sensor.temperature_cave_salledejeux_ouest_0x00158d00041e28df_humidity
+            name: Humidité
+          - entity: >-
+              sensor.temperature_cave_salledejeux_ouest_0x00158d00041e28df_pressure
+            name: Pression atmosphérique
+          - entity: >-
+              sensor.temperature_cave_salledejeux_ouest_0x00158d00041e28df_temperature
+            name: Température
+        title: Temperature/Cave/SalleDeJeux-Ouest/0x00158d00041e28df
+      - type: map
+        entities:
+          - entity: device_tracker.manuels_iphone
+      - type: entities
+        entities:
+          - entity: sensor.temperature_sdb_vasque_0x00158d0005889965_humidity
+            name: Humidité
+          - entity: sensor.temperature_sdb_vasque_0x00158d0005889965_pressure
+            name: Pression atmosphérique
+          - entity: sensor.temperature_sdb_vasque_0x00158d0005889965_temperature
+            name: Température
+        title: Temperature/Sdb/Vasque/0x00158d0005889965

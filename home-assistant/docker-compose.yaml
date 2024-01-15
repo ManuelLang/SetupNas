@@ -4,8 +4,16 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - /PATH_TO_YOUR_CONFIG:/config
+      - ./hassconfig/:/config
       - /etc/localtime:/etc/localtime:ro
+      - /media/sa-nas/1ca37148-c9db-4660-b617-2d797356e44b/Musique:/media/nas/Musique
+      - /media/sa-nas/1ca37148-c9db-4660-b617-2d797356e44b/Media:/media/nas/
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Paris
+      - DISABLE_JEMALLOC=false
     privileged: true
     network_mode: host
+    ports:
+      - 8123:8123
+      - 443:443

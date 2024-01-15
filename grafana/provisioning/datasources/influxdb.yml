@@ -20,9 +20,9 @@ datasources:
   # <string> url
   url: http://influxdb:8086
   # <string> database password, if used
-  password: "admin"
+  password: "<YOUR INFLUXDB_ADMIN_PASSWORD>"
   # <string> database user, if used
-  user: "admin"
+  user: "telegraf"
   # <string> database name, if used
   database: "influx"
   # <bool> enable/disable basic auth
